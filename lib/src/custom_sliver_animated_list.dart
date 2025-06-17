@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'src.dart';
+
 const Duration _kDuration = Duration(milliseconds: 300);
 
 typedef DelegateBuilder = SliverChildBuilderDelegate Function(
@@ -273,8 +275,9 @@ class CustomSliverAnimatedListState extends State<CustomSliverAnimatedList>
         incomingItem?.controller?.view ?? kAlwaysCompleteAnimation;
     return widget.itemBuilder(
       context,
-      _itemIndexToIndex(itemIndex),
       animation,
+      null,
+      _itemIndexToIndex(itemIndex)
     );
   }
 

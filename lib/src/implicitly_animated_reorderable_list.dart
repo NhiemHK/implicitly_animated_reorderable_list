@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:animated_list_plus/src/custom_sliver_animated_list.dart';
 import 'package:animated_list_plus/src/util/sliver_child_separated_builder_delegate.dart';
-import 'package:flutter/material.dart' hide ImplicitlyAnimatedItemBuilder;
+import 'package:flutter/material.dart';
 
 import 'src.dart';
 
@@ -158,8 +158,8 @@ class ImplicitlyAnimatedReorderableList<E extends Object>
     required List<E> items,
     required ImplicitlyAnimatedItemBuilder<Reorderable, E> itemBuilder,
     required ItemDiffUtil<E> areItemsTheSame,
-    RemovedItemBuilder<Reorderable, E>? removeItemBuilder,
-    UpdatedItemBuilder<Reorderable, E>? updateItemBuilder,
+    ImplicitlyRemovedItemBuilder<Reorderable, E>? removeItemBuilder,
+    ImplicitlyUpdatedItemBuilder<Reorderable, E>? updateItemBuilder,
     Duration insertDuration = const Duration(milliseconds: 500),
     Duration removeDuration = const Duration(milliseconds: 500),
     Duration updateDuration = const Duration(milliseconds: 500),
@@ -230,8 +230,8 @@ class ImplicitlyAnimatedReorderableList<E extends Object>
     required ImplicitlyAnimatedItemBuilder<Reorderable, E> itemBuilder,
     required ItemDiffUtil<E> areItemsTheSame,
     required NullableIndexedWidgetBuilder separatorBuilder,
-    RemovedItemBuilder<Reorderable, E>? removeItemBuilder,
-    UpdatedItemBuilder<Reorderable, E>? updateItemBuilder,
+    ImplicitlyRemovedItemBuilder<Reorderable, E>? removeItemBuilder,
+    ImplicitlyUpdatedItemBuilder<Reorderable, E>? updateItemBuilder,
     Duration insertDuration = const Duration(milliseconds: 500),
     Duration removeDuration = const Duration(milliseconds: 500),
     Duration updateDuration = const Duration(milliseconds: 500),
@@ -763,7 +763,7 @@ class ImplicitlyAnimatedReorderableListState<E extends Object>
             // Assign the animation key to the sliver
             key: animatedListKey,
             initialItemCount: newList.length,
-            itemBuilder: (context, index, animation) {
+            itemBuilder: (context, animation, item, index) {
               final Reorderable reorderable = buildItem(
                 context,
                 animation,

@@ -4,17 +4,17 @@ import 'package:animated_list_plus/src/custom_sliver_animated_list.dart';
 import 'package:async/async.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide ImplicitlyAnimatedItemBuilder;
+import 'package:flutter/material.dart';
 
 import 'src.dart';
 
 typedef ImplicitlyAnimatedItemBuilder<W extends Widget, E> = W Function(
     BuildContext context, Animation<double> animation, E item, int i);
 
-typedef RemovedItemBuilder<W extends Widget, E> = W Function(
+typedef ImplicitlyRemovedItemBuilder<W extends Widget, E> = W Function(
     BuildContext context, Animation<double> animation, E item);
 
-typedef UpdatedItemBuilder<W extends Widget, E> = W Function(
+typedef ImplicitlyUpdatedItemBuilder<W extends Widget, E> = W Function(
     BuildContext context, Animation<double> animation, E item);
 
 abstract class ImplicitlyAnimatedListBase<W extends Widget, E extends Object>
@@ -32,17 +32,17 @@ abstract class ImplicitlyAnimatedListBase<W extends Widget, E extends Object>
   ///
   /// If not specified, the [ImplicitlyAnimatedList] uses the [itemBuilder] with
   /// the animation reversed.
-  final RemovedItemBuilder<W, E>? removeItemBuilder;
+  final ImplicitlyRemovedItemBuilder<W, E>? removeItemBuilder;
 
   /// An optional builder when an item in the list was changed but not its position.
   ///
-  /// The [UpdatedItemBuilder] animation will run from 1 to 0 and back to 1 again, while
+  /// The [ImplicitlyUpdatedItemBuilder] animation will run from 1 to 0 and back to 1 again, while
   /// the item parameter will be the old item in the first half of the animation and the new item
   /// in the latter half of the animation. This allows you for example to fade between the old and
   /// the new item.
   ///
   /// If not specified, changes will appear instantaneously.
-  final UpdatedItemBuilder<W, E>? updateItemBuilder;
+  final ImplicitlyUpdatedItemBuilder<W, E>? updateItemBuilder;
 
   /// The data that this [ImplicitlyAnimatedList] should represent.
   final List<E> items;
@@ -138,10 +138,10 @@ abstract class ImplicitlyAnimatedListBaseState<W extends Widget,
   ImplicitlyAnimatedItemBuilder<W, E> get itemBuilder => widget.itemBuilder;
   @nonVirtual
   @protected
-  RemovedItemBuilder<W, E>? get removeItemBuilder => widget.removeItemBuilder;
+  ImplicitlyRemovedItemBuilder<W, E>? get removeItemBuilder => widget.removeItemBuilder;
   @nonVirtual
   @protected
-  UpdatedItemBuilder<W, E>? get updateItemBuilder => widget.updateItemBuilder;
+  ImplicitlyUpdatedItemBuilder<W, E>? get updateItemBuilder => widget.updateItemBuilder;
 
   @override
   void initState() {

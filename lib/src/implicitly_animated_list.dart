@@ -1,6 +1,6 @@
 import 'package:animated_list_plus/src/custom_sliver_animated_list.dart';
 import 'package:animated_list_plus/src/util/sliver_child_separated_builder_delegate.dart';
-import 'package:flutter/material.dart' hide ImplicitlyAnimatedItemBuilder;
+import 'package:flutter/material.dart';
 
 import 'src.dart';
 
@@ -22,17 +22,17 @@ class ImplicitlyAnimatedList<E extends Object> extends StatelessWidget {
   ///
   /// If not specified, the [ImplicitlyAnimatedList] uses the [itemBuilder] with
   /// the animation reversed.
-  final RemovedItemBuilder<Widget, E>? removeItemBuilder;
+  final ImplicitlyRemovedItemBuilder<Widget, E>? removeItemBuilder;
 
   /// An optional builder when an item in the list was changed but not its position.
   ///
-  /// The [UpdatedItemBuilder] animation will run from 1 to 0 and back to 1 again, while
+  /// The [ImplicitlyUpdatedItemBuilder] animation will run from 1 to 0 and back to 1 again, while
   /// the item parameter will be the old item in the first half of the animation and the new item
   /// in the latter half of the animation. This allows you for example to fade between the old and
   /// the new item.
   ///
   /// If not specified, changes will appear instantaneously.
-  final UpdatedItemBuilder<Widget, E>? updateItemBuilder;
+  final ImplicitlyUpdatedItemBuilder<Widget, E>? updateItemBuilder;
 
   /// Called by the DiffUtil to decide whether two object represent the same Item.
   /// For example, if your items have unique ids, this method should check their id equality.
@@ -228,8 +228,8 @@ class SliverImplicitlyAnimatedList<E extends Object>
     required List<E> items,
     required ImplicitlyAnimatedItemBuilder<Widget, E> itemBuilder,
     required ItemDiffUtil<E> areItemsTheSame,
-    RemovedItemBuilder<Widget, E>? removeItemBuilder,
-    UpdatedItemBuilder<Widget, E>? updateItemBuilder,
+    ImplicitlyRemovedItemBuilder<Widget, E>? removeItemBuilder,
+    ImplicitlyUpdatedItemBuilder<Widget, E>? updateItemBuilder,
     Duration insertDuration = const Duration(milliseconds: 500),
     Duration removeDuration = const Duration(milliseconds: 500),
     Duration updateDuration = const Duration(milliseconds: 500),
@@ -279,8 +279,8 @@ class SliverImplicitlyAnimatedList<E extends Object>
     required ImplicitlyAnimatedItemBuilder<Widget, E> itemBuilder,
     required ItemDiffUtil<E> areItemsTheSame,
     required NullableIndexedWidgetBuilder separatorBuilder,
-    RemovedItemBuilder<Widget, E>? removeItemBuilder,
-    UpdatedItemBuilder<Widget, E>? updateItemBuilder,
+    ImplicitlyRemovedItemBuilder<Widget, E>? removeItemBuilder,
+    ImplicitlyUpdatedItemBuilder<Widget, E>? updateItemBuilder,
     Duration insertDuration = const Duration(milliseconds: 500),
     Duration removeDuration = const Duration(milliseconds: 500),
     Duration updateDuration = const Duration(milliseconds: 500),
@@ -317,7 +317,7 @@ class _SliverImplicitlyAnimatedListState<E extends Object>
     return CustomSliverAnimatedList(
       key: animatedListKey,
       initialItemCount: newList.length,
-      itemBuilder: (context, index, animation) {
+      itemBuilder: (context, animation, e, index) {
         final E? item = data.getOrNull(index) ??
             newList.getOrNull(index) ??
             oldList.getOrNull(index);
