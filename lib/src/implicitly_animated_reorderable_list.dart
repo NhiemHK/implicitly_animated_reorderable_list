@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:animated_list_plus/src/custom_sliver_animated_list.dart';
 import 'package:animated_list_plus/src/util/sliver_child_separated_builder_delegate.dart';
-import 'package:flutter/material.dart' hide AnimatedItemBuilder;
+import 'package:flutter/material.dart' hide ImplicitlyAnimatedItemBuilder;
 
 import 'src.dart';
 
@@ -156,7 +156,7 @@ class ImplicitlyAnimatedReorderableList<E extends Object>
   const ImplicitlyAnimatedReorderableList({
     Key? key,
     required List<E> items,
-    required AnimatedItemBuilder<Reorderable, E> itemBuilder,
+    required ImplicitlyAnimatedItemBuilder<Reorderable, E> itemBuilder,
     required ItemDiffUtil<E> areItemsTheSame,
     RemovedItemBuilder<Reorderable, E>? removeItemBuilder,
     UpdatedItemBuilder<Reorderable, E>? updateItemBuilder,
@@ -227,7 +227,7 @@ class ImplicitlyAnimatedReorderableList<E extends Object>
   ImplicitlyAnimatedReorderableList.separated({
     Key? key,
     required List<E> items,
-    required AnimatedItemBuilder<Reorderable, E> itemBuilder,
+    required ImplicitlyAnimatedItemBuilder<Reorderable, E> itemBuilder,
     required ItemDiffUtil<E> areItemsTheSame,
     required NullableIndexedWidgetBuilder separatorBuilder,
     RemovedItemBuilder<Reorderable, E>? removeItemBuilder,

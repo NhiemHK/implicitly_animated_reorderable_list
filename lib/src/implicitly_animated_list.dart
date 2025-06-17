@@ -1,6 +1,6 @@
 import 'package:animated_list_plus/src/custom_sliver_animated_list.dart';
 import 'package:animated_list_plus/src/util/sliver_child_separated_builder_delegate.dart';
-import 'package:flutter/material.dart' hide AnimatedItemBuilder;
+import 'package:flutter/material.dart' hide ImplicitlyAnimatedItemBuilder;
 
 import 'src.dart';
 
@@ -12,7 +12,7 @@ class ImplicitlyAnimatedList<E extends Object> extends StatelessWidget {
   /// Called, as needed, to build list item widgets.
   ///
   /// List items are only built when they're scrolled into view.
-  final AnimatedItemBuilder<Widget, E> itemBuilder;
+  final ImplicitlyAnimatedItemBuilder<Widget, E> itemBuilder;
 
   /// Called to build widgets that get placed between
   /// itemBuilder(context, index) and itemBuilder(context, index + 1).
@@ -226,7 +226,7 @@ class SliverImplicitlyAnimatedList<E extends Object>
   const SliverImplicitlyAnimatedList({
     Key? key,
     required List<E> items,
-    required AnimatedItemBuilder<Widget, E> itemBuilder,
+    required ImplicitlyAnimatedItemBuilder<Widget, E> itemBuilder,
     required ItemDiffUtil<E> areItemsTheSame,
     RemovedItemBuilder<Widget, E>? removeItemBuilder,
     UpdatedItemBuilder<Widget, E>? updateItemBuilder,
@@ -276,7 +276,7 @@ class SliverImplicitlyAnimatedList<E extends Object>
   SliverImplicitlyAnimatedList.separated({
     Key? key,
     required List<E> items,
-    required AnimatedItemBuilder<Widget, E> itemBuilder,
+    required ImplicitlyAnimatedItemBuilder<Widget, E> itemBuilder,
     required ItemDiffUtil<E> areItemsTheSame,
     required NullableIndexedWidgetBuilder separatorBuilder,
     RemovedItemBuilder<Widget, E>? removeItemBuilder,
